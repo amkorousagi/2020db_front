@@ -33,6 +33,10 @@ import Icons from "views/Icons/Icons.js";
 import Maps from "views/Maps/Maps.js";
 import NotificationsPage from "views/Notifications/Notifications.js";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
+import Login from "views/Custom/Login.js";
+import Rating from "views/Custom/Rating.js";
+import Insert from "views/Custom/Insert.js";
+import Update from "views/Custom/Update.js";
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage.js";
 
@@ -107,6 +111,38 @@ const dashboardRoutes = [
     rtlName: "التطور للاحترافية",
     icon: Unarchive,
     component: UpgradeToPro,
+    layout: "/admin"
+  },
+  {
+    path: "/login",
+    name: "Login",
+    rtlName: "لوحة القيادة",
+    icon: Dashboard,
+    component: Login,
+    layout: "/admin"
+  },
+  {
+    path: "/rating",
+    name: "Rating",
+    rtlName: "لوحة القيادة",
+    icon: Dashboard,
+    component: Rating,
+    layout: "/admin"
+  },
+  {
+    path: "/insert",
+    name: "Insert",
+    rtlName: "لوحة القيادة",
+    icon: Dashboard,
+    component: Insert,
+    layout: "/admin"
+  },
+  {
+    path: "/update",
+    name: "Update",
+    rtlName: "لوحة القيادة",
+    icon: Dashboard,
+    component: Update,
     layout: "/admin"
   }
 ];
