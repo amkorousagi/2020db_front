@@ -93,184 +93,215 @@ export default function Insert() {
   function onClick(e){
     console.log(e);
     console.log(video_type);
-  }
-
-  useEffect(() => {
-    console.log("fetched");
-      axios.get("http://localhost:5000/rating?account_id=1")//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
+    if(video_type != 'episode'){
+    axios.get(`http://localhost:5000/insert_video?
+account_id=1&
+video_type=${video_type}&
+video_name=${video_name}&
+published_date=${published_date}&
+uploaded_date=${uploaded_date}&
+runtime=${runtime}&
+description=${description}
+      `)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
+      .then(res => { console.log(res.data); return res.data})
+      .then(
+        (result) => {
+          console.log(result);
+        }
+      )
+      .catch(error => {
+        console.error(error);
+      })
+    }
+    else{
+      axios.get(`http://localhost:5000/insert_video?
+  account_id=1&
+  video_type=${video_type}&
+  video_name=${video_name}&
+  published_date=${published_date}&
+  uploaded_date=${uploaded_date}&
+  runtime=${runtime}&
+  description=${description}&
+  season=${season}&
+  round=${round}
+        `)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
         .then(res => { console.log(res.data); return res.data})
         .then(
           (result) => {
             console.log(result);
-            setIsLoaded(true);
-            setItems(result);
           }
         )
         .catch(error => {
-          setIsLoaded(true);
-          setError(error);
           console.error(error);
         })
+    }
+      window.alert("inserted video!");
+  }
+
+  useEffect(() => {
+    console.log("fetched");
     }, [])
 
-  return (
-    <div>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
-          <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Insert video</h4>
-              <p className={classes.cardCategoryWhite}>Complete video profile</p>
-            </CardHeader>
-            <CardBody>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={5}>
-                  <CustomInput
-                    labelText= {video_type}
-                    id={video_type}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: (event) => handleChange_video_type(event),
-                      type: "text",
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText= {video_name}
-                    id={video_name}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: (event) => handleChange_video_name(event),
-                      type: "text",
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText= {published_date}
-                    id={published_date}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: (event) => handleChange_published_date(event),
-                      type: "text",
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText= {uploaded_date}
-                    id={uploaded_date}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: (event) => handleChange_uploaded_date(event),
-                      type: "text",
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText= {runtime}
-                    id={runtime}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: (event) => handleChange_runtime(event),
-                      type: "text",
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText= {description}
-                    id={description}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: (event) => handleChange_description(event),
-                      type: "text",
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText= {season}
-                    id={season}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: (event) => handleChange_season(event),
-                      type: "text",
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText= {round}
-                    id={round}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: (event) => handleChange_round(event),
-                      type: "text",
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
+    return (
+      <div>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={8}>
+            <Card>
+              <CardHeader color="primary">
+                <h4 className={classes.cardTitleWhite}>Insert video</h4>
+                <p className={classes.cardCategoryWhite}>Complete video profile</p>
+              </CardHeader>
+              <CardBody>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={5}>
+                    <CustomInput
+                      labelText="video type(movie or episode or knu_original)"
+                      id={video_type}
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        onChange: (event) => handleChange_video_type(event),
+                        type: "text",
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={3}>
+                    <CustomInput
+                      labelText= "video name"
+                      id={video_name}
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        onChange: (event) => handleChange_video_name(event),
+                        type: "text",
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <CustomInput
+                      labelText= "published date(YY/MM/DD)"
+                      id={published_date}
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        onChange: (event) => handleChange_published_date(event),
+                        type: "text",
+                      }}
+                    />
+                  </GridItem>
+                </GridContainer>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <CustomInput
+                      labelText= "uploaded date(YY/MM/DD)"
+                      id={uploaded_date}
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        onChange: (event) => handleChange_uploaded_date(event),
+                        type: "text",
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <CustomInput
+                      labelText= "runtime"
+                      id={runtime}
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        onChange: (event) => handleChange_runtime(event),
+                        type: "text",
+                      }}
+                    />
+                  </GridItem>
+                </GridContainer>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <CustomInput
+                      labelText= "description"
+                      id={description}
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        onChange: (event) => handleChange_description(event),
+                        type: "text",
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <CustomInput
+                      labelText="season"
+                      id={season}
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        onChange: (event) => handleChange_season(event),
+                        type: "text",
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <CustomInput
+                      labelText="round"
+                      id={round}
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        onChange: (event) => handleChange_round(event),
+                        type: "text",
+                      }}
+                    />
+                  </GridItem>
+                </GridContainer>
 
-            </CardBody>
-            <CardFooter>
-              <Button onClick={e=>onClick(e)} color="primary">Insert Video</Button>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
-              <h4 className={classes.cardTitle}>Alec Thompson</h4>
-              <p className={classes.description}>
-                Don{"'"}t be scared of the truth because we need to restart the
-                human foundation in truth And I love you like Kanye loves Kanye
-                I love Rick Owens’ bed design but the back is...
-              </p>
-              <ul>
-                {items.map(item => (
-                  <li>
-                    videoid:{item.VIDEO_ID}, score:{item.SCORE}, desc:{item.DESCRIPTION}, account_id:{item.ACCOUNT_ID}
-                  </li>
-                ))}
-              </ul>
+              </CardBody>
+              <CardFooter>
+                <Button onClick={e=>onClick(e)} color="primary">Insert Video</Button>
+              </CardFooter>
+            </Card>
+          </GridItem>
+        </GridContainer>
 
-              <Button color="primary" round>
-                Follow
-              </Button>
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
-
-    </div>
-  );
+      </div>
+    );
 }
+/*
+<GridItem xs={12} sm={12} md={4}>
+  <Card profile>
+    <CardAvatar profile>
+      <a href="#pablo" onClick={e => e.preventDefault()}>
+        <img src={avatar} alt="..." />
+      </a>
+    </CardAvatar>
+    <CardBody profile>
+      <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
+      <h4 className={classes.cardTitle}>Alec Thompson</h4>
+      <p className={classes.description}>
+        Don{"'"}t be scared of the truth because we need to restart the
+        human foundation in truth And I love you like Kanye loves Kanye
+        I love Rick Owens’ bed design but the back is...
+      </p>
+      <ul>
+        {items.map(item => (
+          <li>
+            videoid:{item.VIDEO_ID}, score:{item.SCORE}, desc:{item.DESCRIPTION}, account_id:{item.ACCOUNT_ID}
+          </li>
+        ))}
+      </ul>
+
+      <Button color="primary" round>
+        Follow
+      </Button>
+    </CardBody>
+  </Card>
+</GridItem>
+*/
