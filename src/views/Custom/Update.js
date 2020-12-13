@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -194,6 +194,11 @@ video_id=${video_id}
   return (
     <div>
       <GridContainer>
+      <GridItem xs={12} sm={12} md={5}>
+        <Card>
+        <Link to={`/admin/home/${account_id}`}>home</Link>
+        </Card>
+      </GridItem>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
             <CardHeader color="primary">

@@ -58,20 +58,18 @@ export default function Login() {
 
   function onClick(e){
     console.log(e);
-axios.get(`http://localhost:5000/login?
-account_pw=${account_pw}&account_name=${account_name}
+axios.get(`http://localhost:5000/account_delete?
+account_pw=${account_pw}&account_id=${account_name}
 `)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
     .then(res => { console.log(res.data); return res.data})
     .then(
        (result) => {
-        setAccount_id(result[0]);
-        console.log(account_id);
         console.log(result);
         return result;
       }
     ).then(
       result => {
-        window.alert("account_id:" + result[0]);
+        window.alert("sign out");
       }
     )
     .catch(error => {
@@ -95,14 +93,14 @@ account_pw=${account_pw}&account_name=${account_name}
           <GridItem xs={12} sm={12} md={8}>
             <Card>
               <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Sign in</h4>
-                <p className={classes.cardCategoryWhite}>Complete your name, pw</p>
+                <h4 className={classes.cardTitleWhite}>Delete_user</h4>
+                <p className={classes.cardCategoryWhite}>Complete your id, pw</p>
               </CardHeader>
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={5}>
                     <CustomInput
-                      labelText="account name"
+                      labelText="account id"
                       id={account_name}
                       formControlProps={{
                         fullWidth: true
@@ -131,7 +129,7 @@ account_pw=${account_pw}&account_name=${account_name}
 
               </CardBody>
               <CardFooter>
-                <Button onClick={e=>onClick(e)} color="primary">Sign in</Button>
+                <Button onClick={e=>onClick(e)} color="primary">sign out</Button>
               </CardFooter>
             </Card>
           </GridItem>

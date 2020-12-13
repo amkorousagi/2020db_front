@@ -46,7 +46,7 @@ export default function Rating() {
   const [items, setItems] = useState(["a","b"]);
   useEffect(() => {
     console.log("fetched");
-      axios.get(`http://localhost:5000/rating?account_id=${account_id}`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
+      axios.get(`http://localhost:5000/best`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
         .then(res => { console.log(res.data); return res.data})
         .then(
           (result) => {
@@ -76,7 +76,8 @@ export default function Rating() {
             <GridItem xs={12} sm={12} md={8}>
             <Card>
               <li>
-                videoid:{item.VIDEO_ID}, score:{item.SCORE}, desc:{item.DESCRIPTION}, account_id:{item.ACCOUNT_ID}
+                videoid:{item.VIDEO_ID}, video_name:{item.VIDEO_NAME}, mean_rating:{item.MEAN_RATING}, video type:{item.VIDEO_TYPE}
+                sum_view_count:{item.SUM_VIEW_COUNT}, published_date:{item.PUBLISHED_DATE}, uploaded_date:{item.UPLOADED_DATE}, runtime:{item.RUNTIME}
               </li>
               </Card>
             </GridItem>

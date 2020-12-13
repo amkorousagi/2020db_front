@@ -38,15 +38,21 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function Rating() {
+export default function Average_rating() {
   const {account_id} = useParams();
   const classes = useStyles();
+  const [video_id, setVideo_id] = useState(1);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState(["a","b"]);
-  useEffect(() => {
+
+  function handleChange_video_id(e){
+    setVideo_id(e.target.value);
+  }
+
+  function onClick(e){
     console.log("fetched");
-      axios.get(`http://localhost:5000/rating?account_id=${account_id}`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
+      axios.get(`http://localhost:5000/average_rating?video_id=${video_id}`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
         .then(res => { console.log(res.data); return res.data})
         .then(
           (result) => {
@@ -60,7 +66,7 @@ export default function Rating() {
           setError(error);
           console.error(error);
         })
-    }, [])
+    }
 
   return (
     <div>
@@ -70,13 +76,29 @@ export default function Rating() {
         <Link to={`/admin/home/${account_id}`}>home</Link>
         </Card>
       </GridItem>
+      <GridItem xs={12} sm={12} md={3}>
+        <CustomInput
+          labelText= "video_id"
+          id={video_id}
+          formControlProps={{
+            fullWidth: true
+          }}
+          inputProps={{
+            onChange: (event) => handleChange_video_id(event),
+            type: "text",
+          }}
+        />
+      </GridItem>
+      <CardFooter>
+        <Button onClick={e=>onClick(e)} color="primary">Sign up</Button>
+      </CardFooter>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
           {items.map(item => (
             <GridItem xs={12} sm={12} md={8}>
             <Card>
               <li>
-                videoid:{item.VIDEO_ID}, score:{item.SCORE}, desc:{item.DESCRIPTION}, account_id:{item.ACCOUNT_ID}
+                average rating:{item.AVG_SCORE}
               </li>
               </Card>
             </GridItem>

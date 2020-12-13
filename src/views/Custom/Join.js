@@ -39,105 +39,81 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function Insert() {
-  const {account_id} = useParams();
+export default function Join() {
+
   const classes = useStyles();
+  const [account_id, setAccount_id] = useState(1);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState(["a","b"]);
   const [name, setName] = useState("psc");
-  const [video_type, setVideo_type] = useState("video type(movie or episode or knu_original)");
-  const [video_name, setVideo_name] = useState("video name");
-  const [published_date, setPublished_date] = useState("published date(YY/MM/DD)");
-  const [uploaded_date, setUploaded_date] = useState("uploaded_date(YY/MM/DD)");
-  const [runtime, setRuntime] = useState("runtime");
-  const [description, setDescription] = useState("description");
-  const [season, setSeason] = useState("season (only episode type)");
-  const [round, setRound] = useState("round (only episode type)");
+  const [account_name, setAccount_name] = useState("account name");
+  const [account_pw, setAccount_pw] = useState("account pw");
+  const [phone, setPhone] = useState("phone");
+  const [sex, setSex] = useState("Sex")
+  const [birth_date, setBirth_date] = useState("birth_date(YY/MM/DD)");
+  const [address, setAddress] = useState("address");
+  const [job, setJob] = useState("job");
+  const [permission, setPermission] = useState("permision(admin, basic, premium)");
 
   function handleChange(e) {
     setName(e.target.value);
     console.log(name);
   }
-  function handleChange_video_type(e) {
-    setVideo_type(e.target.value);
-    console.log(video_type);
+  function handleChange_account_name(e) {
+    setAccount_name(e.target.value);
+    console.log(account_name);
   }
-  function handleChange_video_name(e) {
-    setVideo_name(e.target.value);
-    console.log(video_name);
+  function handleChange_account_pw(e) {
+    setAccount_pw(e.target.value);
+    console.log(account_pw);
   }
-  function handleChange_published_date(e) {
-    setPublished_date(e.target.value);
-    console.log(published_date);
+  function handleChange_phone(e) {
+    setPhone(e.target.value);
+    console.log(phone);
   }
-  function handleChange_uploaded_date(e) {
-    setUploaded_date(e.target.value);
-    console.log(uploaded_date);
+  function handleChange_birth_date(e) {
+    setBirth_date(e.target.value);
+    console.log(birth_date);
   }
-  function handleChange_runtime(e) {
-    setRuntime(e.target.value);
-    console.log(runtime);
+  function handleChange_address(e) {
+    setAddress(e.target.value);
+    console.log(address);
   }
-  function handleChange_description(e) {
-    setDescription(e.target.value);
-    console.log(description);
+  function handleChange_job(e) {
+    setJob(e.target.value);
+    console.log(job);
   }
-  function handleChange_season(e) {
-    setSeason(e.target.value);
-    console.log(season);
+  function handleChange_permission(e) {
+    setPermission(e.target.value);
+    console.log(permission);
   }
-  function handleChange_round(e) {
-    setRound(e.target.value);
-    console.log(round);
+  function handleChange_sex(e) {
+    setSex(e.target.value);
+    console.log(sex);
   }
 
   function onClick(e){
     console.log(e);
-    console.log(video_type);
-    if(video_type != 'episode'){
-    axios.get(`http://localhost:5000/insert_video?
-account_id=${account_id}&
-video_type=${video_type}&
-video_name=${video_name}&
-published_date=${published_date}&
-uploaded_date=${uploaded_date}&
-runtime=${runtime}&
-description=${description}
-      `)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
-      .then(res => { console.log(res.data); return res.data})
-      .then(
-        (result) => {
-          console.log(result);
-        }
-      )
-      .catch(error => {
-        console.error(error);
-      })
-    }
-    else{
-      axios.get(`http://localhost:5000/insert_video?
-  account_id=${account_id}&
-  video_type=${video_type}&
-  video_name=${video_name}&
-  published_date=${published_date}&
-  uploaded_date=${uploaded_date}&
-  runtime=${runtime}&
-  description=${description}&
-  season=${season}&
-  round=${round}
-        `)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
-        .then(res => { console.log(res.data); return res.data})
-        .then(
-          (result) => {
-            console.log(result);
-          }
-        )
-        .catch(error => {
-          console.error(error);
-        })
-    }
-      window.alert("inserted video!");
+axios.get(`http://localhost:5000/join?
+account_pw=${account_pw}&account_name=${account_name}&phone=${phone}&sex=${sex}&birth_date=${birth_date}&address=${address}&job=${job}&permission=${permission}
+`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
+    .then(res => { console.log(res.data); return res.data})
+    .then(
+       (result) => {
+        setAccount_id(result[0]);
+        console.log(account_id);
+        console.log(result);
+        return result;
+      }
+    ).then(
+      result => {
+        window.alert("account_id:" + result[0]);
+      }
+    )
+    .catch(error => {
+      console.error(error);
+    })
   }
 
   useEffect(() => {
@@ -156,46 +132,46 @@ description=${description}
           <GridItem xs={12} sm={12} md={8}>
             <Card>
               <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Insert video</h4>
-                <p className={classes.cardCategoryWhite}>Complete video profile</p>
+                <h4 className={classes.cardTitleWhite}>Sign up</h4>
+                <p className={classes.cardCategoryWhite}>Complete your profile</p>
               </CardHeader>
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={5}>
                     <CustomInput
-                      labelText="video type(movie or episode or knu_original)"
-                      id={video_type}
+                      labelText="account name"
+                      id={account_name}
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        onChange: (event) => handleChange_video_type(event),
+                        onChange: (event) => handleChange_account_name(event),
                         type: "text",
                       }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={3}>
                     <CustomInput
-                      labelText= "video name"
-                      id={video_name}
+                      labelText= "account pw"
+                      id={account_pw}
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        onChange: (event) => handleChange_video_name(event),
+                        onChange: (event) => handleChange_account_pw(event),
                         type: "text",
                       }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
-                      labelText= "published date(YY/MM/DD)"
-                      id={published_date}
+                      labelText= "phone"
+                      id={phone}
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        onChange: (event) => handleChange_published_date(event),
+                        onChange: (event) => handleChange_phone(event),
                         type: "text",
                       }}
                     />
@@ -204,26 +180,26 @@ description=${description}
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
-                      labelText= "uploaded date(YY/MM/DD)"
-                      id={uploaded_date}
+                      labelText= "sex"
+                      id={sex}
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        onChange: (event) => handleChange_uploaded_date(event),
+                        onChange: (event) => handleChange_sex(event),
                         type: "text",
                       }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
-                      labelText= "runtime"
-                      id={runtime}
+                      labelText= "birth date(YY/MM/DD)"
+                      id={birth_date}
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        onChange: (event) => handleChange_runtime(event),
+                        onChange: (event) => handleChange_birth_date(event),
                         type: "text",
                       }}
                     />
@@ -232,39 +208,39 @@ description=${description}
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
-                      labelText= "description"
-                      id={description}
+                      labelText= "address"
+                      id={address}
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        onChange: (event) => handleChange_description(event),
+                        onChange: (event) => handleChange_address(event),
                         type: "text",
                       }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
-                      labelText="season"
-                      id={season}
+                      labelText="job"
+                      id={job}
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        onChange: (event) => handleChange_season(event),
+                        onChange: (event) => handleChange_job(event),
                         type: "text",
                       }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
-                      labelText="round"
-                      id={round}
+                      labelText="permission"
+                      id={permission}
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        onChange: (event) => handleChange_round(event),
+                        onChange: (event) => handleChange_permission(event),
                         type: "text",
                       }}
                     />
@@ -273,7 +249,7 @@ description=${description}
 
               </CardBody>
               <CardFooter>
-                <Button onClick={e=>onClick(e)} color="primary">Insert Video</Button>
+                <Button onClick={e=>onClick(e)} color="primary">Sign up</Button>
               </CardFooter>
             </Card>
           </GridItem>
@@ -282,34 +258,3 @@ description=${description}
       </div>
     );
 }
-/*
-<GridItem xs={12} sm={12} md={4}>
-  <Card profile>
-    <CardAvatar profile>
-      <a href="#pablo" onClick={e => e.preventDefault()}>
-        <img src={avatar} alt="..." />
-      </a>
-    </CardAvatar>
-    <CardBody profile>
-      <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
-      <h4 className={classes.cardTitle}>Alec Thompson</h4>
-      <p className={classes.description}>
-        Don{"'"}t be scared of the truth because we need to restart the
-        human foundation in truth And I love you like Kanye loves Kanye
-        I love Rick Owens’ bed design but the back is...
-      </p>
-      <ul>
-        {items.map(item => (
-          <li>
-            videoid:{item.VIDEO_ID}, score:{item.SCORE}, desc:{item.DESCRIPTION}, account_id:{item.ACCOUNT_ID}
-          </li>
-        ))}
-      </ul>
-
-      <Button color="primary" round>
-        Follow
-      </Button>
-    </CardBody>
-  </Card>
-</GridItem>
-*/

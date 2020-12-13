@@ -39,44 +39,40 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function Login() {
-
+export default function Rate() {
+  const {account_id} = useParams();
   const classes = useStyles();
-  const [account_id, setAccount_id] = useState(1);
-  const [account_name, setAccount_name] = useState("account name");
-  const [account_pw, setAccount_pw] = useState("account pw");
+  const [video_name, setVideo_name] = useState("video name");
+  const [description, setDescription] = useState("description");
 
+  function handleChange_video_name(e) {
+    setVideo_name(e.target.value);
+    console.log(video_name);
+  }
+  function handleChange_description(e) {
+    setDescription(e.target.value);
+    console.log(description);
+  }
 
-  function handleChange_account_name(e) {
-    setAccount_name(e.target.value);
-    console.log(account_name);
-  }
-  function handleChange_account_pw(e) {
-    setAccount_pw(e.target.value);
-    console.log(account_pw);
-  }
 
   function onClick(e){
     console.log(e);
-axios.get(`http://localhost:5000/login?
-account_pw=${account_pw}&account_name=${account_name}
-`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
+
+  axios.get(`http://localhost:5000/rate?
+account_id=${account_id}&
+video_name=${video_name}&
+desc=${description}`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
     .then(res => { console.log(res.data); return res.data})
     .then(
-       (result) => {
-        setAccount_id(result[0]);
-        console.log(account_id);
+      (result) => {
         console.log(result);
-        return result;
-      }
-    ).then(
-      result => {
-        window.alert("account_id:" + result[0]);
       }
     )
     .catch(error => {
       console.error(error);
     })
+
+      window.alert("rate!");
   }
 
   useEffect(() => {
@@ -95,43 +91,46 @@ account_pw=${account_pw}&account_name=${account_name}
           <GridItem xs={12} sm={12} md={8}>
             <Card>
               <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Sign in</h4>
-                <p className={classes.cardCategoryWhite}>Complete your name, pw</p>
+                <h4 className={classes.cardTitleWhite}>Insert video</h4>
+                <p className={classes.cardCategoryWhite}>Complete video profile</p>
               </CardHeader>
               <CardBody>
                 <GridContainer>
-                  <GridItem xs={12} sm={12} md={5}>
-                    <CustomInput
-                      labelText="account name"
-                      id={account_name}
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        onChange: (event) => handleChange_account_name(event),
-                        type: "text",
-                      }}
-                    />
-                  </GridItem>
                   <GridItem xs={12} sm={12} md={3}>
                     <CustomInput
-                      labelText= "account pw"
-                      id={account_pw}
+                      labelText= "video name"
+                      id={video_name}
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        onChange: (event) => handleChange_account_pw(event),
+                        onChange: (event) => handleChange_video_name(event),
                         type: "text",
                       }}
                     />
                   </GridItem>
-                </GridContainer>
 
+                </GridContainer>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <CustomInput
+                      labelText= "description"
+                      id={description}
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        onChange: (event) => handleChange_description(event),
+                        type: "text",
+                      }}
+                    />
+                  </GridItem>
+
+                </GridContainer>
 
               </CardBody>
               <CardFooter>
-                <Button onClick={e=>onClick(e)} color="primary">Sign in</Button>
+                <Button onClick={e=>onClick(e)} color="primary">rate Video</Button>
               </CardFooter>
             </Card>
           </GridItem>
@@ -140,3 +139,34 @@ account_pw=${account_pw}&account_name=${account_name}
       </div>
     );
 }
+/*
+<GridItem xs={12} sm={12} md={4}>
+  <Card profile>
+    <CardAvatar profile>
+      <a href="#pablo" onClick={e => e.preventDefault()}>
+        <img src={avatar} alt="..." />
+      </a>
+    </CardAvatar>
+    <CardBody profile>
+      <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
+      <h4 className={classes.cardTitle}>Alec Thompson</h4>
+      <p className={classes.description}>
+        Don{"'"}t be scared of the truth because we need to restart the
+        human foundation in truth And I love you like Kanye loves Kanye
+        I love Rick Owens’ bed design but the back is...
+      </p>
+      <ul>
+        {items.map(item => (
+          <li>
+            videoid:{item.VIDEO_ID}, score:{item.SCORE}, desc:{item.DESCRIPTION}, account_id:{item.ACCOUNT_ID}
+          </li>
+        ))}
+      </ul>
+
+      <Button color="primary" round>
+        Follow
+      </Button>
+    </CardBody>
+  </Card>
+</GridItem>
+*/
