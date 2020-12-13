@@ -122,7 +122,7 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/rating",
+    path: "/rating/:account_id",
     name: "Rating",
     rtlName: "لوحة القيادة",
     icon: Dashboard,
@@ -130,7 +130,7 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/insert",
+    path: "/insert/:account_id",
     name: "Insert",
     rtlName: "لوحة القيادة",
     icon: Dashboard,
@@ -138,7 +138,7 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/update",
+    path: "/update/:account_id",
     name: "Update",
     rtlName: "لوحة القيادة",
     icon: Dashboard,

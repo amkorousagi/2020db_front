@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { useParams } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -38,13 +39,14 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 export default function Rating() {
+  const {account_id} = useParams();
   const classes = useStyles();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState(["a","b"]);
   useEffect(() => {
     console.log("fetched");
-      axios.get("http://localhost:5000/rating?account_id=1")//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
+      axios.get(`http://localhost:5000/rating?account_id=${account_id}`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
         .then(res => { console.log(res.data); return res.data})
         .then(
           (result) => {

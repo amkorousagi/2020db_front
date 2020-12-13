@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { useParams } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -39,6 +40,7 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 export default function Insert() {
+  const {account_id} = useParams();
   const classes = useStyles();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -95,7 +97,7 @@ export default function Insert() {
     console.log(video_type);
     if(video_type != 'episode'){
     axios.get(`http://localhost:5000/insert_video?
-account_id=1&
+account_id=${account_id}&
 video_type=${video_type}&
 video_name=${video_name}&
 published_date=${published_date}&
@@ -115,7 +117,7 @@ description=${description}
     }
     else{
       axios.get(`http://localhost:5000/insert_video?
-  account_id=1&
+  account_id=${account_id}&
   video_type=${video_type}&
   video_name=${video_name}&
   published_date=${published_date}&
@@ -140,6 +142,7 @@ description=${description}
 
   useEffect(() => {
     console.log("fetched");
+    console.log(account_id);
     }, [])
 
     return (
