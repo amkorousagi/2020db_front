@@ -14,6 +14,22 @@ import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+import Typography from '@material-ui/core/Typography';
+
 import avatar from "assets/img/faces/marc.jpg";
 import axios from "axios";
 
@@ -82,69 +98,107 @@ version=${version}`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-
   return (
     <div>
     <GridItem xs={12} sm={12} md={5}>
-      <Card>
-      <Link to={`/admin/home/${account_id}`}>home</Link>
-      </Card>
+      <Paper background="blue">
+      <Typography align="center" color="primary" variant="h4">
+        <Link to={`/admin/home/${account_id}`} >
+        Home</Link>
+        </Typography>
+      </Paper>
     </GridItem>
-      <Button onClick={e=>onClick(e)} color="primary">Search Video</Button>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={5}>
-          <CustomInput
-            labelText="video type(movie or episode or knu_original)"
-            id={video_type}
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              onChange: (event) => handleChange_video_type(event),
-              type: "text",
-            }}
-          />
+    <Card>
+    <CardHeader color="primary">
+      <h4 className={classes.cardTitleWhite}>Search video</h4>
+      <p className={classes.cardCategoryWhite}>Complete your video specification</p>
+    </CardHeader>
+    <CardBody>
+      <GridContainer alignItems="center">
+        <GridItem xs={12} sm={12} md={3}>
+        <Card>
+        <FormControl fullWidth={true} margin={"nomal"}>
+        <InputLabel id="demo-simple-select-label">video type</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={video_type}
+          onChange={(event) => handleChange_video_type(event)}
+        >
+          <MenuItem value={"movie"}>movie</MenuItem>
+          <MenuItem value={"episode"}>episode</MenuItem>
+          <MenuItem value={"knu_original"}>knu_original</MenuItem>
+        </Select>
+      </FormControl>
+      </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
-          <CustomInput
-            labelText= "genre(Action or Comedy or Romance or Genre4 or Genre5)"
-            id={genre}
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              onChange: (event) => handleChange_genre(event),
-              type: "text",
-            }}
-          />
+        <Card>
+        <FormControl fullWidth={true} margin={"nomal"}>
+        <InputLabel id="demo-simple-select-label">genre</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={genre}
+          onChange={(event) => handleChange_genre(event)}
+        >
+          <MenuItem value="">
+            <em>none</em>
+          </MenuItem>
+          <MenuItem value={"Action"}>Action</MenuItem>
+          <MenuItem value={"Comedy"}>Comedy</MenuItem>
+          <MenuItem value={"Romance"}>Romance</MenuItem>
+        </Select>
+      </FormControl>
+      </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={3}>
-          <CustomInput
-            labelText= "version"
-            id={version}
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              onChange: (event) => handleChange_version(event),
-              type: "text",
-            }}
-          />
+        <Card>
+        <FormControl fullWidth={true} margin={"nomal"}>
+        <InputLabel id="demo-simple-select-label">country</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={version}
+          onChange={(event) => handleChange_version(event)}
+        >
+          <MenuItem value="">
+            <em>none</em>
+          </MenuItem>
+          <MenuItem value={"KR"}>KR</MenuItem>
+          <MenuItem value={"US"}>US</MenuItem>
+          <MenuItem value={"UA"}>UA</MenuItem>
+        </Select>
+      </FormControl>
+      </Card>
         </GridItem>
       </GridContainer>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
-          <Card>
-          {items.map(item => (
-            <GridItem xs={12} sm={12} md={8}>
-            <Card>
-              <li>
-                video_name:{item.VIDEO_NAME}, view_count:{item.VIEW_COUNT}, mean_ratting:{item.MEAN_RATING}, runtime:{item.RUNTIME}
-              </li>
-              </Card>
-            </GridItem>
-          ))}
-          </Card>
-        </GridItem>
-
+      <GridItem xs={12} sm={12} md={5}>
+        <Button onClick={e=>onClick(e)} color="primary">Search Video</Button>
+      </GridItem>
       </GridContainer>
-
+      </CardBody>
+      </Card>
+      <TableContainer component={Paper}>
+   <Table className={classes.table} aria-label="simple table">
+     <TableHead>
+       <TableRow>
+         <TableCell align="right">Video name</TableCell>
+         <TableCell align="right">Video type</TableCell>
+         <TableCell align="right">Genre name</TableCell>
+         <TableCell align="right">County</TableCell>
+       </TableRow>
+     </TableHead>
+     <TableBody>
+       {items.map((item) => (
+         <TableRow key={""}>
+           <TableCell align="right">{item.VIDEO_NAME}</TableCell>
+           <TableCell align="right">{item.VIDEO_TYPE}</TableCell>
+           <TableCell align="right">{item.GENRE_NAME}</TableCell>
+           <TableCell align="right">{item.COUNTRY}</TableCell>
+         </TableRow>
+       ))}
+     </TableBody>
+   </Table>
+ </TableContainer>
     </div>
   );
 }

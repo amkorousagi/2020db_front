@@ -23,6 +23,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+
+import Typography from '@material-ui/core/Typography';
 import { render } from "react-dom";
 
 const styles = {
@@ -62,78 +64,108 @@ export default function Home() {
             <Card>
               <CardHeader color="primary">
                 <h4 className={classes.cardTitleWhite}>KnuMovie</h4>
-                <p className={classes.cardCategoryWhite}>Search Movie / All video</p>
+                <p className={classes.cardCategoryWhite}>enjoy video</p>
               </CardHeader>
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={5}>
                     <Card>
-                    <Link to="/admin/join">join</Link>
+                    <Typography align="center" color="primary" variant="h4">
+                      <Link to={`/admin/join`} >
+                      Sign up</Link>
+                      </Typography>
                     </Card>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={5}>
                     <Card>
-                    <Link to="/admin/login">login</Link>
+                    <Typography align="center" color="primary" variant="h4">
+                      <Link to={`/admin/login`} >
+                      Sign in</Link>
+                      </Typography>
                     </Card>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={5}>
                     <Card>
-                    <Link to={`/admin/insert/${account_id}`}>insert video</Link>
+                    <Typography align="center" color="primary" variant="h4">
+                      <Link to={`/admin/insert/${account_id}`}>Insert video</Link>
+                      </Typography>
                     </Card>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={5}>
                     <Card>
-                    <Link to={`/admin/update/${account_id}`}>update video</Link>
+                    <Typography align="center" color="primary" variant="h4">
+                      <Link to={`/admin/update/${account_id}`}>Update video</Link>
+                      </Typography>
                     </Card>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={5}>
                     <Card>
-                    <Link to={`/admin/rating/${account_id}`}>rating</Link>
+                    <Typography align="center" color="primary" variant="h4">
+                      <Link to={`/admin/rating/${account_id}`}>Rating</Link>
+                      </Typography>
                     </Card>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={5}>
                     <Card>
-                    <Link to={`/admin/search_result/${account_id}`}>search_result</Link>
+                    <Typography align="center" color="primary" variant="h4">
+                      <Link to={`/admin/search_result/${account_id}`}>Search result</Link>
+                      </Typography>
                     </Card>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={5}>
                     <Card>
-                    <Link to={`/admin/view_all_movie/${account_id}`}>view_all_movie</Link>
+                    <Typography align="center" color="primary" variant="h4">
+                      <Link to={`/admin/view_all_movie/${account_id}`}>View all movie</Link>
+                      </Typography>
                     </Card>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={5}>
                     <Card>
-                    <Link to={`/admin/view_all_episode/${account_id}`}>view_all_episode</Link>
+                    <Typography align="center" color="primary" variant="h4">
+                      <Link to={`/admin/view_all_episode/${account_id}`}>View all episode</Link>
+                      </Typography>
                     </Card>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={5}>
                     <Card>
-                    <Link to={`/admin/view_all_knu_original/${account_id}`}>view_all_knu_original</Link>
+                    <Typography align="center" color="primary" variant="h5">
+                      <Link to={`/admin/view_all_knu_original/${account_id}`}>View all knu original</Link>
+                      </Typography>
                     </Card>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={5}>
                     <Card>
-                    <Link to={`/admin/update_user/${account_id}`}>update_user</Link>
+                    <Typography align="center" color="primary" variant="h4">
+                      <Link to={`/admin/update_user/${account_id}`}>Update user</Link>
+                      </Typography>
                     </Card>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={5}>
                     <Card>
-                    <Link to={`/admin/delete_user/${account_id}`}>delete_user</Link>
+                    <Typography align="center" color="primary" variant="h4">
+                      <Link to={`/admin/delete_user/${account_id}`}>Delete user</Link>
+                      </Typography>
+                      </Card>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={5}>
+                    <Card>
+                    <Typography align="center" color="primary" variant="h4">
+                      <Link to={`/admin/best/${account_id}`}>Recommend video</Link>
+                      </Typography>
                     </Card>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={5}>
                     <Card>
-                    <Link to={`/admin/best/${account_id}`}>best</Link>
+                    <Typography align="center" color="primary" variant="h4">
+                      <Link to={`/admin/average_rating/${account_id}`}>Average video</Link>
+                      </Typography>
                     </Card>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={5}>
                     <Card>
-                    <Link to={`/admin/average_rating/${account_id}`}>average rating</Link>
-                    </Card>
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={5}>
-                    <Card>
-                    <Link to={`/admin/home/${account_id}`}>home</Link>
+                    <Typography align="center" color="primary" variant="h4">
+                      <Link to={`/admin/rate/${account_id}`}>Rate video</Link>
+                      </Typography>
                     </Card>
                   </GridItem>
                 </GridContainer>

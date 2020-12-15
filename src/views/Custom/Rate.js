@@ -15,6 +15,11 @@ import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
+import Typography from '@material-ui/core/Typography';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import avatar from "assets/img/faces/marc.jpg";
 import axios from "axios";
 
@@ -44,6 +49,7 @@ export default function Rate() {
   const classes = useStyles();
   const [video_name, setVideo_name] = useState("video name");
   const [description, setDescription] = useState("description");
+  const [score, setScore] = useState(1);
 
   function handleChange_video_name(e) {
     setVideo_name(e.target.value);
@@ -53,7 +59,10 @@ export default function Rate() {
     setDescription(e.target.value);
     console.log(description);
   }
-
+  function handleChange_score(e) {
+    setScore(e.target.value);
+    console.log(score);
+  }
 
   function onClick(e){
     console.log(e);
@@ -61,7 +70,8 @@ export default function Rate() {
   axios.get(`http://localhost:5000/rate?
 account_id=${account_id}&
 video_name=${video_name}&
-desc=${description}`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
+desc=${description}&
+score=${score}`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
     .then(res => { console.log(res.data); return res.data})
     .then(
       (result) => {
@@ -85,14 +95,17 @@ desc=${description}`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content
         <GridContainer>
         <GridItem xs={12} sm={12} md={5}>
           <Card>
-          <Link to={`/admin/home/${account_id}`}>home</Link>
+          <Typography align="center" color="primary" variant="h4">
+            <Link to={`/admin/home/${account_id}`} >
+            Home</Link>
+            </Typography>
           </Card>
         </GridItem>
           <GridItem xs={12} sm={12} md={8}>
             <Card>
               <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Insert video</h4>
-                <p className={classes.cardCategoryWhite}>Complete video profile</p>
+                <h4 className={classes.cardTitleWhite}>Rate video</h4>
+                <p className={classes.cardCategoryWhite}>rate video</p>
               </CardHeader>
               <CardBody>
                 <GridContainer>
@@ -109,7 +122,19 @@ desc=${description}`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content
                       }}
                     />
                   </GridItem>
-
+                  <GridItem xs={12} sm={12} md={3}>
+                    <CustomInput
+                      labelText= "score"
+                      id={video_name}
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        onChange: (event) => handleChange_score(event),
+                        type: "text",
+                      }}
+                    />
+                  </GridItem>
                 </GridContainer>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>

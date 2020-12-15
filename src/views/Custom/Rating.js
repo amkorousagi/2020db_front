@@ -14,6 +14,16 @@ import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+import Typography from '@material-ui/core/Typography';
 import avatar from "assets/img/faces/marc.jpg";
 import axios from "axios";
 
@@ -67,25 +77,47 @@ export default function Rating() {
       <GridContainer>
       <GridItem xs={12} sm={12} md={5}>
         <Card>
-        <Link to={`/admin/home/${account_id}`}>home</Link>
+        <Typography align="center" color="primary" variant="h4">
+          <Link to={`/admin/home/${account_id}`} >
+          Home</Link>
+          </Typography>
         </Card>
       </GridItem>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
-          {items.map(item => (
-            <GridItem xs={12} sm={12} md={8}>
-            <Card>
-              <li>
-                videoid:{item.VIDEO_ID}, score:{item.SCORE}, desc:{item.DESCRIPTION}, account_id:{item.ACCOUNT_ID}
-              </li>
-              </Card>
-            </GridItem>
-          ))}
+          <CardHeader color="primary">
+            <h4 className={classes.cardTitleWhite}>Rating</h4>
+            <p className={classes.cardCategoryWhite}>video rating</p>
+          </CardHeader>
+          <CardBody>
+
+          </CardBody>
           </Card>
         </GridItem>
 
       </GridContainer>
-
+      <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+      <TableHead>
+       <TableRow>
+         <TableCell align="right">Video id</TableCell>
+         <TableCell align="right">Score</TableCell>
+         <TableCell align="right">Description</TableCell>
+         <TableCell align="right">Account id</TableCell>
+       </TableRow>
+      </TableHead>
+      <TableBody>
+       {items.map((item) => (
+         <TableRow key={""}>
+           <TableCell align="right">{item.VIDEO_ID}</TableCell>
+           <TableCell align="right">{item.SCORE}</TableCell>
+           <TableCell align="right">{item.DESCRIPTION}</TableCell>
+           <TableCell align="right">{item.ACCOUNT_ID}</TableCell>
+         </TableRow>
+       ))}
+      </TableBody>
+      </Table>
+      </TableContainer>
     </div>
   );
 }

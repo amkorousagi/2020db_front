@@ -14,6 +14,18 @@ import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
+
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+import Typography from '@material-ui/core/Typography';
+
 import avatar from "assets/img/faces/marc.jpg";
 import axios from "axios";
 
@@ -67,25 +79,45 @@ export default function View_all_episode() {
       <GridContainer>
       <GridItem xs={12} sm={12} md={5}>
         <Card>
-        <Link to={`/admin/home/${account_id}`}>home</Link>
+        <Typography align="center" color="primary" variant="h4">
+          <Link to={`/admin/home/${account_id}`} >
+          Home</Link>
+          </Typography>
         </Card>
       </GridItem>
         <GridItem xs={12} sm={12} md={8}>
+        <CardHeader color="primary">
+          <h4 className={classes.cardTitleWhite}>View all episode</h4>
+          <p className={classes.cardCategoryWhite}>episodes</p>
+        </CardHeader>
           <Card>
-          {items.map(item => (
-            <GridItem xs={12} sm={12} md={8}>
-            <Card>
-              <li>
-                video_name:{item.VIDEO_NAME}, view_count:{item.VIEW_COUNT}, mean_ratting:{item.MEAN_RATING}, runtime:{item.RUNTIME}
-              </li>
-              </Card>
-            </GridItem>
-          ))}
+
           </Card>
         </GridItem>
 
       </GridContainer>
-
+      <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+      <TableHead>
+       <TableRow>
+         <TableCell align="right">Video name</TableCell>
+         <TableCell align="right">View count</TableCell>
+         <TableCell align="right">mean rating</TableCell>
+         <TableCell align="right">runtime</TableCell>
+       </TableRow>
+      </TableHead>
+      <TableBody>
+       {items.map((item) => (
+         <TableRow key={""}>
+           <TableCell align="right">{item.VIDEO_NAME}</TableCell>
+           <TableCell align="right">{item.VIEW_COUNT}</TableCell>
+           <TableCell align="right">{item.MEAN_RATING}</TableCell>
+           <TableCell align="right">{item.RUNTIME}</TableCell>
+         </TableRow>
+       ))}
+      </TableBody>
+      </Table>
+      </TableContainer>
     </div>
   );
 }

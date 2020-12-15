@@ -15,6 +15,7 @@ import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
+import Typography from '@material-ui/core/Typography';
 import avatar from "assets/img/faces/marc.jpg";
 import axios from "axios";
 
@@ -87,7 +88,10 @@ account_pw=${account_pw}&account_id=${account_name}
         <GridContainer>
         <GridItem xs={12} sm={12} md={5}>
           <Card>
-          <Link to={`/admin/home/${account_id}`}>home</Link>
+          <Typography align="center" color="primary" variant="h4">
+            <Link to={`/admin/home/${account_id}`} >
+            Home</Link>
+            </Typography>
           </Card>
         </GridItem>
           <GridItem xs={12} sm={12} md={8}>

@@ -34,7 +34,7 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/admin" to="/admin/home/1" />
+    <Redirect from="/admin" to="/admin/login" />
   </Switch>
 );
 
@@ -42,6 +42,7 @@ const useStyles = makeStyles(styles);
 
 export default function Admin({ ...rest }) {
   // styles
+  const [userId, setUserId] = React.useState(1);
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
   const mainPanel = React.createRef();
@@ -95,8 +96,8 @@ export default function Admin({ ...rest }) {
   return (
     <div className={classes.wrapper}>
       <Sidebar
-        routes={routes}
-        logoText={"Creative Tim"}
+        routes={[]}
+        logoText={"DB Team 2"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}
@@ -119,15 +120,17 @@ export default function Admin({ ...rest }) {
           <div className={classes.map}>{switchRoutes}</div>
         )}
         {getRoute() ? <Footer /> : null}
-        <FixedPlugin
-          handleImageClick={handleImageClick}
-          handleColorClick={handleColorClick}
-          bgColor={color}
-          bgImage={image}
-          handleFixedClick={handleFixedClick}
-          fixedClasses={fixedClasses}
-        />
       </div>
     </div>
   );
 }
+/*
+<FixedPlugin
+  handleImageClick={handleImageClick}
+  handleColorClick={handleColorClick}
+  bgColor={color}
+  bgImage={image}
+  handleFixedClick={handleFixedClick}
+  fixedClasses={fixedClasses}
+/>
+*/

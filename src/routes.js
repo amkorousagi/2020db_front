@@ -119,6 +119,7 @@ const dashboardRoutes = [
     component: RTLPage,
     layout: "/rtl"
   },
+  /*
   {
     path: "/upgrade-to-pro",
     name: "Upgrade To PRO",
@@ -127,6 +128,7 @@ const dashboardRoutes = [
     component: UpgradeToPro,
     layout: "/admin"
   },
+  */
   {
     path: "/login",
     name: "Login",

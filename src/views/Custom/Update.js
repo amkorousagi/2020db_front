@@ -15,6 +15,13 @@ import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
+import Paper from '@material-ui/core/Paper';
+
+import Typography from '@material-ui/core/Typography';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import avatar from "assets/img/faces/marc.jpg";
 import axios from "axios";
 
@@ -191,13 +198,17 @@ video_id=${video_id}
     console.log(account_id);
     }, [])
 
+if(video_type == "movie"){
   return (
     <div>
       <GridContainer>
       <GridItem xs={12} sm={12} md={5}>
-        <Card>
-        <Link to={`/admin/home/${account_id}`}>home</Link>
-        </Card>
+        <Paper background="blue">
+        <Typography align="center" color="primary" variant="h4">
+          <Link to={`/admin/home/${account_id}`} >
+          Home</Link>
+          </Typography>
+        </Paper>
       </GridItem>
         <GridItem xs={12} sm={12} md={8}>
           <Card>
@@ -208,17 +219,169 @@ video_id=${video_id}
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
+                <Card>
+                <FormControl fullWidth={true} margin={"nomal"}>
+                <InputLabel id="demo-simple-select-label">video type</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={video_type}
+                  onChange={(event) => handleChange_video_type(event)}
+                >
+                  <MenuItem value={"movie"}>movie</MenuItem>
+                  <MenuItem value={"episode"}>episode</MenuItem>
+                  <MenuItem value={"knu_original"}>knu_original</MenuItem>
+                </Select>
+              </FormControl>
+              </Card>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
-                    labelText="video type(movie or episode or knu_original)"
-                    id={video_type}
+                    labelText= "video name"
+                    id={video_name}
                     formControlProps={{
                       fullWidth: true
                     }}
                     inputProps={{
-                      onChange: (event) => handleChange_video_type(event),
+                      onChange: (event) => handleChange_video_name(event),
                       type: "text",
                     }}
                   />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText= "published date(YY/MM/DD)"
+                    id={published_date}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_published_date(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+              </GridContainer>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText= "uploaded date(YY/MM/DD)"
+                    id={uploaded_date}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_uploaded_date(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText= "runtime"
+                    id={runtime}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_runtime(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+              </GridContainer>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText= "description"
+                    id={description}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_description(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+
+              </GridContainer>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                    labelText= "video_id"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_video_id(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+
+                <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                    labelText="movie_id"
+                    id={round}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_movie_id(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+
+              </GridContainer>
+
+            </CardBody>
+            <CardFooter>
+              <Button onClick={e=>onClick(e)} color="primary">Update Video</Button>
+            </CardFooter>
+          </Card>
+        </GridItem>
+      </GridContainer>
+
+    </div>
+  );
+}else if(video_type=="episode"){
+  return (
+    <div>
+      <GridContainer>
+      <GridItem xs={12} sm={12} md={5}>
+        <Paper background="blue">
+        <Typography align="center" color="primary" variant="h4">
+          <Link to={`/admin/home/${account_id}`} >
+          Home</Link>
+          </Typography>
+        </Paper>
+      </GridItem>
+        <GridItem xs={12} sm={12} md={8}>
+          <Card>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Update video</h4>
+              <p className={classes.cardCategoryWhite}>Complete video profile</p>
+            </CardHeader>
+            <CardBody>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={5}>
+                <Card>
+                <FormControl fullWidth={true} margin={"nomal"}>
+                <InputLabel id="demo-simple-select-label">video type</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={video_type}
+                  onChange={(event) => handleChange_video_type(event)}
+                >
+                  <MenuItem value={"movie"}>movie</MenuItem>
+                  <MenuItem value={"episode"}>episode</MenuItem>
+                  <MenuItem value={"knu_original"}>knu_original</MenuItem>
+                </Select>
+              </FormControl>
+              </Card>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
@@ -342,19 +505,142 @@ video_id=${video_id}
                     }}
                   />
                 </GridItem>
+
+              </GridContainer>
+
+            </CardBody>
+            <CardFooter>
+              <Button onClick={e=>onClick(e)} color="primary">Update Video</Button>
+            </CardFooter>
+          </Card>
+        </GridItem>
+      </GridContainer>
+
+    </div>
+  );
+}
+else if(video_type=="knu_original"){
+  return (
+    <div>
+      <GridContainer>
+      <GridItem xs={12} sm={12} md={5}>
+        <Paper background="blue">
+        <Typography align="center" color="primary" variant="h4">
+          <Link to={`/admin/home/${account_id}`} >
+          Home</Link>
+          </Typography>
+        </Paper>
+      </GridItem>
+        <GridItem xs={12} sm={12} md={8}>
+          <Card>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Update video</h4>
+              <p className={classes.cardCategoryWhite}>Complete video profile</p>
+            </CardHeader>
+            <CardBody>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={5}>
+                <Card>
+                <FormControl fullWidth={true} margin={"nomal"}>
+                <InputLabel id="demo-simple-select-label">video type</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={video_type}
+                  onChange={(event) => handleChange_video_type(event)}
+                >
+                  <MenuItem value={"movie"}>movie</MenuItem>
+                  <MenuItem value={"episode"}>episode</MenuItem>
+                  <MenuItem value={"knu_original"}>knu_original</MenuItem>
+                </Select>
+              </FormControl>
+              </Card>
+                </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
-                    labelText="movie_id"
-                    id={round}
+                    labelText= "video name"
+                    id={video_name}
                     formControlProps={{
                       fullWidth: true
                     }}
                     inputProps={{
-                      onChange: (event) => handleChange_movie_id(event),
+                      onChange: (event) => handleChange_video_name(event),
                       type: "text",
                     }}
                   />
                 </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText= "published date(YY/MM/DD)"
+                    id={published_date}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_published_date(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+              </GridContainer>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText= "uploaded date(YY/MM/DD)"
+                    id={uploaded_date}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_uploaded_date(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText= "runtime"
+                    id={runtime}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_runtime(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+              </GridContainer>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText= "description"
+                    id={description}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_description(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+
+              </GridContainer>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                    labelText= "video_id"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_video_id(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomInput
                     labelText="knu_original_id"
@@ -380,6 +666,128 @@ video_id=${video_id}
 
     </div>
   );
+}
+else{
+  return (
+    <div>
+      <GridContainer>
+      <GridItem xs={12} sm={12} md={5}>
+        <Paper background="blue">
+        <Typography align="center" color="primary" variant="h4">
+          <Link to={`/admin/home/${account_id}`} >
+          Home</Link>
+          </Typography>
+        </Paper>
+      </GridItem>
+        <GridItem xs={12} sm={12} md={8}>
+          <Card>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Update video</h4>
+              <p className={classes.cardCategoryWhite}>Complete video profile</p>
+            </CardHeader>
+            <CardBody>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={5}>
+                <Card>
+                <FormControl fullWidth={true} margin={"nomal"}>
+                <InputLabel id="demo-simple-select-label">video type</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={video_type}
+                  onChange={(event) => handleChange_video_type(event)}
+                >
+                  <MenuItem value={"movie"}>movie</MenuItem>
+                  <MenuItem value={"episode"}>episode</MenuItem>
+                  <MenuItem value={"knu_original"}>knu_original</MenuItem>
+                </Select>
+              </FormControl>
+              </Card>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                    labelText= "video name"
+                    id={video_name}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_video_name(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText= "published date(YY/MM/DD)"
+                    id={published_date}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_published_date(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+              </GridContainer>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText= "uploaded date(YY/MM/DD)"
+                    id={uploaded_date}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_uploaded_date(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText= "runtime"
+                    id={runtime}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_runtime(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+              </GridContainer>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText= "description"
+                    id={description}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: (event) => handleChange_description(event),
+                      type: "text",
+                    }}
+                  />
+                </GridItem>
+
+              </GridContainer>
+
+
+            </CardBody>
+            <CardFooter>
+              <Button onClick={e=>onClick(e)} color="primary">Update Video</Button>
+            </CardFooter>
+          </Card>
+        </GridItem>
+      </GridContainer>
+
+    </div>
+  );
+}
 }
 /*
 <GridItem xs={12} sm={12} md={4}>

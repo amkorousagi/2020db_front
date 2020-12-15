@@ -15,6 +15,11 @@ import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
+import Paper from '@material-ui/core/Paper';
+
+import Typography from '@material-ui/core/Typography';
+
+
 import avatar from "assets/img/faces/marc.jpg";
 import axios from "axios";
 
@@ -64,14 +69,14 @@ account_pw=${account_pw}&account_name=${account_name}
     .then(res => { console.log(res.data); return res.data})
     .then(
        (result) => {
-        setAccount_id(result[0]);
+        setAccount_id(result);
         console.log(account_id);
         console.log(result);
         return result;
       }
     ).then(
       result => {
-        window.alert("account_id:" + result[0]);
+        window.alert("account_id:" + result);
       }
     )
     .catch(error => {
@@ -88,9 +93,12 @@ account_pw=${account_pw}&account_name=${account_name}
       <div>
         <GridContainer>
         <GridItem xs={12} sm={12} md={5}>
-          <Card>
-          <Link to={`/admin/home/${account_id}`}>home</Link>
-          </Card>
+          <Paper background="blue">
+          <Typography align="center" color="primary" variant="h4">
+            <Link to={`/admin/home/${account_id}`} >
+            Home</Link>
+            </Typography>
+          </Paper>
         </GridItem>
           <GridItem xs={12} sm={12} md={8}>
             <Card>

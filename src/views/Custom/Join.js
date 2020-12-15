@@ -14,6 +14,13 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
+import Typography from '@material-ui/core/Typography';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+import Paper from '@material-ui/core/Paper';
 
 import avatar from "assets/img/faces/marc.jpg";
 import axios from "axios";
@@ -125,9 +132,12 @@ account_pw=${account_pw}&account_name=${account_name}&phone=${phone}&sex=${sex}&
       <div>
         <GridContainer>
         <GridItem xs={12} sm={12} md={5}>
-          <Card>
-          <Link to={`/admin/home/${account_id}`}>home</Link>
-          </Card>
+        <Paper background="blue">
+        <Typography align="center" color="primary" variant="h4">
+          <Link to={`/admin/home/${account_id}`} >
+          Home</Link>
+          </Typography>
+        </Paper>
         </GridItem>
           <GridItem xs={12} sm={12} md={8}>
             <Card>
@@ -179,17 +189,20 @@ account_pw=${account_pw}&account_name=${account_name}&phone=${phone}&sex=${sex}&
                 </GridContainer>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText= "sex"
-                      id={sex}
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        onChange: (event) => handleChange_sex(event),
-                        type: "text",
-                      }}
-                    />
+                  <Card>
+                  <FormControl fullWidth={true} margin={"nomal"}>
+                  <InputLabel id="demo-simple-select-label">sex</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={sex}
+                    onChange={(event) => handleChange_sex(event)}
+                  >
+                    <MenuItem value={"M"}>male</MenuItem>
+                    <MenuItem value={"F"}>female</MenuItem>
+                  </Select>
+                </FormControl>
+                </Card>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
@@ -233,17 +246,21 @@ account_pw=${account_pw}&account_name=${account_name}&phone=${phone}&sex=${sex}&
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="permission"
-                      id={permission}
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        onChange: (event) => handleChange_permission(event),
-                        type: "text",
-                      }}
-                    />
+                  <Card>
+                  <FormControl fullWidth={true} margin={"nomal"}>
+                  <InputLabel id="demo-simple-select-label">permission</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={permission}
+                    onChange={(event) => handleChange_permission(event)}
+                  >
+                    <MenuItem value={"admin"}>admin</MenuItem>
+                    <MenuItem value={"basic"}>basic</MenuItem>
+                    <MenuItem value={"premium"}>premium</MenuItem>
+                  </Select>
+                  </FormControl>
+                  </Card>
                   </GridItem>
                 </GridContainer>
 
