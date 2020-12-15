@@ -112,7 +112,7 @@ export default function Average_rating() {
         />
       </GridItem>
       <CardFooter>
-        <Button onClick={e=>onClick(e)} color="primary">get id</Button>
+        <Button onClick={e=>onClick(e)} color="primary">get info</Button>
       </CardFooter>
       </CardBody>
       </Card>

@@ -171,7 +171,7 @@ export default function Home() {
                   <GridItem xs={12} sm={12} md={5}>
                     <Card>
                     <Typography align="center" color="primary" variant="h4">
-                      <Link to={`/admin/search_id/${account_id}`}>Rate video</Link>
+                      <Link to={`/admin/search_id/${account_id}`}>Video info</Link>
                       </Typography>
                     </Card>
                   </GridItem>
