@@ -1,3 +1,4 @@
 1. git clone
-2. npm install
-3. npm start
+2. cd 2020db_front
+3. npm install
+4. npm start
