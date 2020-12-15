@@ -320,19 +320,7 @@ if(video_type == "movie"){
                   />
                 </GridItem>
 
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="movie_id"
-                    id={round}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: (event) => handleChange_movie_id(event),
-                      type: "text",
-                    }}
-                  />
-                </GridItem>
+
 
               </GridContainer>
 
@@ -492,19 +480,7 @@ if(video_type == "movie"){
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="episode_id"
-                    id={season}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: (event) => handleChange_episode_id(event),
-                      type: "text",
-                    }}
-                  />
-                </GridItem>
+
 
               </GridContainer>
 
@@ -641,19 +617,7 @@ else if(video_type=="knu_original"){
                   />
                 </GridItem>
 
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="knu_original_id"
-                    id={round}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: (event) => handleChange_knu_original_id(event),
-                      type: "text",
-                    }}
-                  />
-                </GridItem>
+              
               </GridContainer>
 
             </CardBody>

@@ -51,6 +51,7 @@ import Search_result from "views/Custom/Search_result.js";
 import Best from "views/Custom/Best.js";
 import Average from "views/Custom/Average_rating.js";
 import Rate from "views/Custom/Rate.js"
+import Search_id from "views/Custom/Search_id.js"
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage.js";
 
@@ -255,6 +256,14 @@ const dashboardRoutes = [
     rtlName: "لوحة القيادة",
     icon: Dashboard,
     component: Rate,
+    layout: "/admin"
+  },
+  {
+    path: "/search_id/:account_id",
+    name: "Search_id",
+    rtlName: "لوحة القيادة",
+    icon: Dashboard,
+    component: Search_id,
     layout: "/admin"
   }
 ];

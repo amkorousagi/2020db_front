@@ -53,18 +53,19 @@ const useStyles = makeStyles(styles);
 export default function Average_rating() {
   const {account_id} = useParams();
   const classes = useStyles();
-  const [video_id, setVideo_id] = useState();
+  const [video_name, setVideo_name] = useState();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
-
-  function handleChange_video_id(e){
-    setVideo_id(e.target.value);
+  const video_property = ["video id", "video_name", "video_mean_rating","video_type","video_thumnale","sum_view_count","published_date","uploaded_date","runtime"];
+  let i = 0;
+  function handleChange_video_name(e){
+    setVideo_name(e.target.value);
   }
 
   function onClick(e){
     console.log("fetched");
-      axios.get(`http://localhost:5000/average_rating?video_id=${video_id}`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
+      axios.get(`http://localhost:5000/search_id?video_name=${video_name}`)//,{"Access-Control-Allow-Origin": "*", "headers":{'Content-Type': 'application/json'}})
         .then(res => { console.log(res.data); return res.data})
         .then(
           (result) => {
@@ -93,25 +94,25 @@ export default function Average_rating() {
       </GridItem>
       <Card>
       <CardHeader color="primary">
-        <h4 className={classes.cardTitleWhite}>Average rating</h4>
-        <p className={classes.cardCategoryWhite}>mean rating</p>
+        <h4 className={classes.cardTitleWhite}>Search id</h4>
+        <p className={classes.cardCategoryWhite}>get video id</p>
       </CardHeader>
       <CardBody>
       <GridItem xs={12} sm={12} md={3}>
         <CustomInput
-          labelText= "video_id"
-          id={video_id}
+          labelText= "video_name"
+          id={video_name}
           formControlProps={{
             fullWidth: true
           }}
           inputProps={{
-            onChange: (event) => handleChange_video_id(event),
+            onChange: (event) => handleChange_video_name(event),
             type: "text",
           }}
         />
       </GridItem>
       <CardFooter>
-        <Button onClick={e=>onClick(e)} color="primary">get average_rating</Button>
+        <Button onClick={e=>onClick(e)} color="primary">get id</Button>
       </CardFooter>
       </CardBody>
       </Card>
@@ -122,15 +123,15 @@ export default function Average_rating() {
       <Table className={classes.table} aria-label="simple table">
       <TableHead>
        <TableRow>
-         <TableCell align="right">Video id</TableCell>
-         <TableCell align="right">Mean rating</TableCell>
+         <TableCell align="right">Video property name</TableCell>
+         <TableCell align="right">Video property value</TableCell>
          </TableRow>
       </TableHead>
       <TableBody>
        {items.map((item) => (
          <TableRow key={""}>
-           <TableCell align="right">{video_id}</TableCell>
-           <TableCell align="right">{item.AVG_SCORE}</TableCell>
+           <TableCell align="right">{video_property[i++]}</TableCell>
+           <TableCell align="right">{item}</TableCell>
          </TableRow>
        ))}
       </TableBody>

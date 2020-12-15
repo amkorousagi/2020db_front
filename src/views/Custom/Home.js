@@ -168,6 +168,13 @@ export default function Home() {
                       </Typography>
                     </Card>
                   </GridItem>
+                  <GridItem xs={12} sm={12} md={5}>
+                    <Card>
+                    <Typography align="center" color="primary" variant="h4">
+                      <Link to={`/admin/search_id/${account_id}`}>Rate video</Link>
+                      </Typography>
+                    </Card>
+                  </GridItem>
                 </GridContainer>
               </CardBody>
             </Card>
